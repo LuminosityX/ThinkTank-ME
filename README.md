@@ -4,14 +4,68 @@ This repository contains the code, dataset construction pipeline, and more exper
 
 ## Motivation
 
+<p align="center">
+  <img src="figs/fig_motivation.png" width="500"/>
+</p>
+
+
 ## Framework
+
+![framework](figs/fig_framework.png)
 
 ## Experiments
 
 ![exp_1](figs/table_1_1.png)
 ![exp_2](figs/table_1_2.png)
-![exp_3](figs/figure_1.png)
-![exp_4](figs/figure_2.png)
+![exp_3](figs/fig_exp_1.png)
+![exp_4](figs/fig_exp_2.png)
+
+## Prompts
+
+### For the expert model:
+```
+System:
+You are a think tank expert specializing in the political, military, and economic dynamics of {country}. You possess extensive knowledge of historical and contemporary events, policies, and strategies relevant to {country} and its interactions with other nations. Your expertise includes identifying patterns and trends in historical and current events, interpreting complex geopolitical contexts, and delivering informed predictions.
+
+Your task is to analyze [Historical Events] and predict the most likely object for a [Current Event to Predict]. [Historical Events] consist of a series of timestamped event sets, with each set containing multiple atomic events. The [Current Event to Predict] is presented as a query requiring the identification of the most plausible object, based on the given subject, relationship, and timestamp. Each timestamp is represented as [year-month-day], and atomic events are formatted as triples [subject, relation, object]. For example, [France, REQUEST_meet, Russia] indicates that  'France' (subject) has the relation 'REQUEST_meet' with 'Russia' (object).
+
+User:
+[Historical Events]:
+{historical_events}
+[Current Event to Predict]:
+{current_event}
+
+Please use your deep understanding of {country_name_i}'s internal and external dynamics, as well as the broader geopolitical environment, to deliver accurate, contextually informed predictions. Only provide the missing object without additional explanation.
+
+Assistant:
+{Object}
+```
+
+### For the routing model:
+
+<details>
+<summary>The prompts are as follows:</summary>
+
+```
+System:
+Your task is to analyze [Historical Events] and [Current Event to Predict], and then select the most appropriate expert by reasoning from among the candidates to make a prediction.
+
+[Candidates] consist of the nationalities of different experts. [Historical Events] consist of a series of timestamped event sets, with each set containing multiple atomic events. The [Current Event to Predict] is presented as a query requiring the identification of the most plausible object, based on the given subject, relationship, and timestamp. Each timestamp is represented as [year-month-day], and atomic events are formatted as triples [subject, relation, object]. For example, [France, REQUEST_meet, Russia] indicates that  'France' (subject) has the relation 'REQUEST_meet' with 'Russia' (object).
+
+User:
+[Historical Events]:
+{historical_events}
+[Candidates]:
+['Iran', 'Israel', 'Egypt', 'Saudi Arabia', 'Turkey', 'Iraq', 'Yemen', 'Syria', 'Jordan', 'United Arab Emirates', 'Lebanon', 'Oman', 'Kuwait', 'Qatar', 'Bahrain', 'Cyprus', 'Palestine', 'China', 'United States', 'Russia', 'United Kingdom', 'France', 'Germany', 'Korea', 'Japan', 'India', 'Canada', 'Italy', 'Australia', 'Spain', 'Argentina', 'Brazil', 'Indonesia', 'Mexico', 'South Africa']
+
+Please use your deep understanding of the predicted events and the broader geopolitical environment, to deliver accurate, contextually informed selections. Only provide the nationality of the expert without additional explanation. 
+
+Assistant:
+{Expert}
+```
+
+
+</details>
 
 ## POLECAT-FOR-ME
 
