@@ -55,6 +55,8 @@ Your task is to analyze [Historical Events] and [Current Event to Predict], and 
 User:
 [Historical Events]:
 {historical_events}
+[Current Event to Predict]:
+{current_event}
 [Candidates]:
 ['Iran', 'Israel', 'Egypt', 'Saudi Arabia', 'Turkey', 'Iraq', 'Yemen', 'Syria', 'Jordan', 'United Arab Emirates', 'Lebanon', 'Oman', 'Kuwait', 'Qatar', 'Bahrain', 'Cyprus', 'Palestine', 'China', 'United States', 'Russia', 'United Kingdom', 'France', 'Germany', 'Korea', 'Japan', 'India', 'Canada', 'Italy', 'Australia', 'Spain', 'Argentina', 'Brazil', 'Indonesia', 'Mexico', 'South Africa']
 
